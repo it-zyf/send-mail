@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xyy.mail.mail.mapper.MailSendLogMapper">
+    <insert id="insertMailsendLog" parameterType="com.xyy.mail.mail.entity.MailSendLog">
+          insert into mail_send_log (msgId,empId,status,routeKey,exchange,tryTime,createTime,updateTime)
+    values (#{msgId},#{empId},#{status},#{routeKey},#{exchange},#{tryTime},#{createTime},#{updateTime})
+    </insert>
+
+    <update id="updateMailsendLog">
+        update mail_send_log set status=${status} where msgId=#{id}
+    </update>
+
+    <select id="getStudentByStatusTryTime" resultType="com.xyy.mail.mail.entity.MailSendLog">
+     select * from mail_send_log where status=0 and tryTime &lt; sysdate()
+    </select>
+
+    <update id="updateCount">
+        update mail_send_log set count=count+1,updateTime=#{date} where msgId=#{msgId};
+    </update>
+    <select id="getStudentByMsgId" resultType="com.xyy.mail.mail.entity.Student">
+        select * from user where id=#{empId};
+    </select>
+
+</mapper>

@@ -21,9 +21,21 @@ import java.util.Map;
 public class RabbitmqTest {
     @Autowired
     private RabbitTemplate rabbitTemplate;
+    //直接模式
     @RequestMapping("/direct")
     public Map test(){
-        rabbitTemplate.convertAndSend("xyy","123");
+        rabbitTemplate.convertAndSend("test","123");
         return new HashMap<String, Object>(){{put("msg","成功");}};
     }
+
+    //分裂模式.略.
+
+    //主题模式测试.
+    @RequestMapping("/stopic")
+    public Map test1(){
+        rabbitTemplate.convertAndSend("xyyExchanges","hh.test","主题模式测试");
+        return new HashMap<String, Object>(){{put("msg","成功");}};
+    }
+
+
 }

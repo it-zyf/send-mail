@@ -1,4 +1,4 @@
-package com.xyy.mail.mail;
+package com.xyy.mail.mail.controller;
 
 import com.xyy.mail.MailApplication;
 import com.xyy.mail.mail.entity.User;
