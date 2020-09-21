@@ -51,6 +51,7 @@ public class AddUserServiceImpl implements AddUserService {
             mailSendLog.setTryTime(new Date(System.currentTimeMillis() + 1000 * 60 * 1));
             mailSendLogMapper.insertMailsendLog(mailSendLog);
             rabbitTemplate.convertAndSend(MailConstants.MAIL_EXCHANGE_NAME, MailConstants.MAIL_ROUTING_KEY_NAME, student, new CorrelationData(mailSendLog.getMsgId()));
+            rabbitTemplate.convertAndSend(MailConstants.MAIL_EXCHANGE_NAME, MailConstants.MAIL_ROUTING_KEY_NAME, student, new CorrelationData(mailSendLog.getMsgId()));
             return new HashMap(){{put("mes","插入成功");}};
         } catch (AmqpException e) {
             e.printStackTrace();
