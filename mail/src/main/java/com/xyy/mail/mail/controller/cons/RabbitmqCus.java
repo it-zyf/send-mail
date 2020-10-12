@@ -50,11 +50,11 @@ public class RabbitmqCus {
             }
             MimeMessage mimeMessage = javaMailSender.createMimeMessage();
             MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true);
-            helper.setSubject("这是一封测试邮件");
+            helper.setSubject("WELL COME ");
             helper.setFrom("761769578@qq.com");
             helper.setTo(student.getImage());
             helper.setSentDate(new Date());
-            helper.setText("这是测试邮件的正文");
+            helper.setText("爱要大声说出来!");
             //添加附件
             helper.addAttachment("123.jpg", new File("C:\\Users\\yayu\\Pictures\\Camera Roll\\wallhaven-xlq8xv_1920x1080.png"));
             javaMailSender.send(mimeMessage);

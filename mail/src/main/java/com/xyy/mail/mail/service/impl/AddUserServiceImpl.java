@@ -12,6 +12,7 @@ import org.springframework.amqp.AmqpException;
 import org.springframework.amqp.rabbit.connection.CorrelationData;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -35,11 +36,15 @@ public class AddUserServiceImpl implements AddUserService {
     @Autowired
     private MailSendLogMapper mailSendLogMapper;
 
+    @Autowired
+    private BCryptPasswordEncoder encoder;
 
     @Override
     public Map addUser(Student student) {
         try {
             student.setId(String.valueOf(snowflake.nextId()));
+
+            student.setPassword(encoder.encode(student.getPassword()));
             adduserMapper.addStudent(student);
             MailSendLog mailSendLog = new MailSendLog();
             mailSendLog.setMsgId(IdUtil.randomUUID());
@@ -51,7 +56,7 @@ public class AddUserServiceImpl implements AddUserService {
             mailSendLog.setTryTime(new Date(System.currentTimeMillis() + 1000 * 60 * 1));
             mailSendLogMapper.insertMailsendLog(mailSendLog);
             rabbitTemplate.convertAndSend(MailConstants.MAIL_EXCHANGE_NAME, MailConstants.MAIL_ROUTING_KEY_NAME, student, new CorrelationData(mailSendLog.getMsgId()));
-            rabbitTemplate.convertAndSend(MailConstants.MAIL_EXCHANGE_NAME, MailConstants.MAIL_ROUTING_KEY_NAME, student, new CorrelationData(mailSendLog.getMsgId()));
+//            rabbitTemplate.convertAndSend(MailConstants.MAIL_EXCHANGE_NAME, MailConstants.MAIL_ROUTING_KEY_NAME, student, new CorrelationData(mailSendLog.getMsgId()));
             return new HashMap(){{put("mes","插入成功");}};
         } catch (AmqpException e) {
             e.printStackTrace();

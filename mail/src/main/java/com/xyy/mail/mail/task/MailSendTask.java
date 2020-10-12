@@ -8,7 +8,6 @@ import com.xyy.mail.mail.service.MailSendLogService;
 import org.springframework.amqp.rabbit.connection.CorrelationData;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
@@ -27,7 +26,7 @@ public class MailSendTask {
     @Autowired
     private RabbitTemplate rabbitTemplate;
 
-    @Scheduled(cron = "0/10 * * * * ?")
+//    @Scheduled(cron = "0/10 * * * * ?")
     public void mailSendTask() {
         List<MailSendLog> mailsendLogList = mailSendLogService.getStudentByStatusTryTime();
         if (CollUtil.isEmpty(mailsendLogList)) {
