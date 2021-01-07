@@ -108,7 +108,7 @@
             </exclusions>
         </dependency>
     </dependencies>
-
+    <!--接口和xml文件在同一目录-->
     <build>
         <resources>
             <resource>

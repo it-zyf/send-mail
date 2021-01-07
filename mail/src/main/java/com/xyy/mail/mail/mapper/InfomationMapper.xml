@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xyy.mail.mail.mapper.InfomationMapper">
+    <select id="findAllInfomation" resultType="com.xyy.mail.mail.entity.Infomation">
+        select  * from infomation;
+    </select>
+
+</mapper>

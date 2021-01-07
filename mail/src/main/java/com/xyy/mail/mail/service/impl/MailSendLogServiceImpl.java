@@ -1,5 +1,7 @@
 package com.xyy.mail.mail.service.impl;
 
+import cn.hutool.core.lang.Snowflake;
+import com.xyy.mail.mail.entity.Infomation;
 import com.xyy.mail.mail.entity.MailSendLog;
 import com.xyy.mail.mail.entity.Student;
 import com.xyy.mail.mail.mapper.MailSendLogMapper;
@@ -20,6 +22,9 @@ import java.util.List;
 public class MailSendLogServiceImpl implements MailSendLogService {
     @Autowired
     private MailSendLogMapper mailSendLogMapper;
+
+    @Autowired
+    private Snowflake snowflake;
 
     @Override
     public void insertMailsendLog(MailSendLog mailSendLog) {
@@ -44,6 +49,17 @@ public class MailSendLogServiceImpl implements MailSendLogService {
     @Override
     public Student getStudentByMsgId(String empId) {
         return mailSendLogMapper.getStudentByMsgId(empId);
+    }
+
+    @Override
+    public void insertInfomation(Infomation infomation) {
+        mailSendLogMapper.insertInfomation(infomation);
+    }
+
+    @Override
+    public Long aInfomation() {
+        Infomation build = Infomation.builder().name("张亚锋").age(24).sex("男").time(new Date()).id(String.valueOf(snowflake.nextId())).build();
+        return mailSendLogMapper.ainsertInfomation(build);
     }
 
 

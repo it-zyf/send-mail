@@ -1,5 +1,6 @@
 package com.xyy.mail.mail.service;
 
+import com.xyy.mail.mail.entity.Infomation;
 import com.xyy.mail.mail.entity.MailSendLog;
 import com.xyy.mail.mail.entity.Student;
 
@@ -22,4 +23,7 @@ public interface MailSendLogService {
 
      Student getStudentByMsgId(String empId);
 
+     void insertInfomation(Infomation infomation);
+
+    Long aInfomation();
 }

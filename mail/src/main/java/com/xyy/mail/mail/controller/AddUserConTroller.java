@@ -2,6 +2,7 @@ package com.xyy.mail.mail.controller;
 
 import com.xyy.mail.mail.entity.Student;
 import com.xyy.mail.mail.service.AddUserService;
+import com.xyy.mail.mail.service.MailSendLogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,8 +22,21 @@ public class AddUserConTroller {
     @Autowired
     private AddUserService addUserService;
 
+    @Autowired
+    private MailSendLogService  mailSendLogService;
+
     @RequestMapping("/user")
     public Map add(@RequestBody Student student) {
         return addUserService.addUser(student);
     }
+
+    //测试添加数据主键回显
+    @RequestMapping("/infomation")
+    public Long addInfomation(){
+        return mailSendLogService.aInfomation();
+    }
+
+
+
+
 }

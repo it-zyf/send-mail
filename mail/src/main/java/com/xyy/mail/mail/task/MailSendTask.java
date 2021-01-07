@@ -1,6 +1,8 @@
 package com.xyy.mail.mail.task;
 
 import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.lang.Snowflake;
+import com.xyy.mail.mail.entity.Infomation;
 import com.xyy.mail.mail.entity.MailConstants;
 import com.xyy.mail.mail.entity.MailSendLog;
 import com.xyy.mail.mail.entity.Student;
@@ -25,8 +27,10 @@ public class MailSendTask {
     private MailSendLogService mailSendLogService;
     @Autowired
     private RabbitTemplate rabbitTemplate;
+    @Autowired
+    private Snowflake snowflake;
 
-//    @Scheduled(cron = "0/10 * * * * ?")
+    //    @Scheduled(cron = "0/10 * * * * ?")
     public void mailSendTask() {
         List<MailSendLog> mailsendLogList = mailSendLogService.getStudentByStatusTryTime();
         if (CollUtil.isEmpty(mailsendLogList)) {
@@ -46,4 +50,12 @@ public class MailSendTask {
 
 
     }
+
+//    @Scheduled(cron = "0 */1 * * * ?")
+    public void mailDeleteTask() {
+        Infomation infomationg = Infomation.builder().age(12).name("xyy").sex("男").photo("C:\\Users\\yayu\\Pictures\\Camera Roll\\46509166.jpg").id(String.valueOf(snowflake.nextId())).time(new Date()).build();
+        mailSendLogService.insertInfomation(infomationg);
+    }
+
+
 }

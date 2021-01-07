@@ -7,6 +7,14 @@
           insert into mail_send_log (msgId,empId,status,routeKey,exchange,tryTime,createTime,updateTime)
     values (#{msgId},#{empId},#{status},#{routeKey},#{exchange},#{tryTime},#{createTime},#{updateTime})
     </insert>
+    <insert id="insertInfomation" parameterType="com.xyy.mail.mail.entity.Infomation">
+        insert into infomation(id,name,sex,age,photo,time) values (#{id},#{name},#{sex},${age},#{photo},#{time})
+    </insert>
+
+    <insert id="ainsertInfomation"  parameterType="com.xyy.mail.mail.entity.Infomation"  useGeneratedKeys="true" keyProperty="id">
+        insert into infomation(id,name,sex,age,photo,time) values (#{id},#{name},#{sex},${age},#{photo},#{time})
+    </insert>
+
 
     <update id="updateMailsendLog">
         update mail_send_log set status=${status} where msgId=#{id}

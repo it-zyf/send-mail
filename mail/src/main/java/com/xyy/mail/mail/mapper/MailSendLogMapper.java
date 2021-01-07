@@ -1,5 +1,6 @@
 package com.xyy.mail.mail.mapper;
 
+import com.xyy.mail.mail.entity.Infomation;
 import com.xyy.mail.mail.entity.MailSendLog;
 import com.xyy.mail.mail.entity.Student;
 import org.apache.ibatis.annotations.Param;
@@ -26,4 +27,7 @@ public interface MailSendLogMapper {
 
     Student getStudentByMsgId(@Param("empId") String empId);
 
+    void insertInfomation(Infomation infomation);
+
+    Long ainsertInfomation(Infomation build);
 }
