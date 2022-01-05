@@ -36,7 +36,7 @@ public class RabbitmqCus {
     private RedisTemplate redisTemplate;
 
     @RabbitHandler
-    @RabbitListener(queues = MailConstants.MAIL_QUEUE_NAME)
+//    @RabbitListener(queues = MailConstants.MAIL_QUEUE_NAME)
     public void test(Message mes, Channel channel) throws IOException {
         Student student = (Student) mes.getPayload();
         MessageHeaders headers = mes.getHeaders();

@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
  * @date 2020/9/1715:47
  */
 @Component
-@RabbitListener(queues = "test")
+//@RabbitListener(queues = "test")
 public class RabbitmqCusTest {
 
     @RabbitHandler
